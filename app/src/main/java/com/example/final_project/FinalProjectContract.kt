@@ -2,7 +2,7 @@ package com.example.final_project
 
 import android.app.usage.UsageEvents
 
-class FinalProjectContract {
+interface FinalProjectContract {
     // EventListView.kt
     interface EventListView {
         fun showEvents(events: List<UsageEvents.Event>)
