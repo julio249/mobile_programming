@@ -5,42 +5,18 @@
     android:orientation="vertical">
 
 
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="191dp">
-
-        <ImageView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_gravity="center"
-            android:layout_marginLeft="150dp"
-            android:layout_marginRight="150dp"
-            android:src="@drawable/logo" />
-    </LinearLayout>
-
-
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="left"
-        android:layout_marginLeft="50dp"
-        android:text="Sign In"
-        android:textColor="@color/black"
-        android:textSize="24sp"
-        android:textStyle="bold"/>
-
-    <TextView
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="30dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="left"
         android:layout_marginLeft="50dp"
         android:layout_marginRight="50dp"
-        android:layout_marginTop="15dp"
-        android:text="Hi there! Nice to see you again."
-        android:layout_marginBottom="20dp"
-        android:textSize="15sp"
-        android:textColor="#989EB1"/>
+        android:text="Sign Up"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        android:textStyle="bold"/>
 
 
     <TextView
@@ -56,14 +32,14 @@
 
     <EditText
         android:id="@+id/id_email"
-        android:layout_marginLeft="50dp"
-        android:layout_marginRight="50dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
 
-        android:hint="example@email.com"
+        android:layout_marginBottom="20dp"
 
-        android:layout_marginBottom="20dp"/>
+        android:hint="example@email.com" />
 
     <TextView
         android:layout_width="match_parent"
@@ -84,61 +60,46 @@
         android:layout_marginLeft="50dp"
         android:layout_marginRight="50dp"
         android:hint="Password"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="30dp"
         android:inputType="textPassword" />
 
+
     <Button
-        android:id="@+id/id_sign_in_btn"
+        android:id="@+id/id_continue_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="60dp"
         android:layout_marginRight="60dp"
         android:layout_marginBottom="30dp"
         android:background="@drawable/button_pattern"
-        android:text="Sign in"
+        android:text="Continue"
         android:textColor="@color/white"
 
         />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="or use one of your social profiles:"
-        android:textColor="#989eb1"
-        android:layout_marginBottom="20dp"
-        />
-
-    <TextView
-        android:id="@+id/id_guest_btn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:textColor="#f85f6a"
-        android:layout_marginBottom="60dp"
-        android:text="Continue as a Guest" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_margin="5dp"
         >
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Forgot Password?"
+            android:text="Have an Account?"
             android:textSize="16sp"
+            android:layout_marginEnd="5dp"
             android:textColor="#989eb1"
-            android:layout_marginLeft="65dp"
+
             />
 
         <TextView
-            android:id="@+id/id_signUp_btn"
+            android:id="@+id/id_sign_in_plus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="75dp"
-            android:text="Sign Up"
+            android:text="Sign In"
             android:textColor="#f85f6a"
             android:textSize="16sp" />
 
