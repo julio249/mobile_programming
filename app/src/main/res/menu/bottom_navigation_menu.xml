@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:title="Home" />
-    <item android:title="Festivals" />
-    <item android:title="Galleries" />
+    <item android:title="Home"
+        android:id="@+id/home_btn"/>
+    <item android:title="Festivals"
+        android:id="@+id/festivals_btn"/>
+    <item android:title="Galleries"
+        android:id="@+id/galleries_btn"/>
 
 
 </menu>
