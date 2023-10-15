@@ -4,12 +4,10 @@ import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.OnClickListener
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.appcompat.view.menu.MenuView.ItemView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.final_project.Festival
+import com.example.final_project.models.Festival
 import com.example.final_project.R
 
 class FestivalAdapter (private val context: Context, private val festivalList: ArrayList<Festival>):
@@ -36,13 +34,13 @@ class FestivalAdapter (private val context: Context, private val festivalList: A
         holder.endDate.text = currentFestival.endDate
 
 
-//        holder.itemView.setOnClickListener{
-//            if (onClickListener != null)
-//            {
-//                Log.e("Festival Clicked","Festival Clicked")
-//                onClickListener!!.onClick(position,currentFestival)
-//            }
-//        }
+        holder.itemView.setOnClickListener{
+            if (onClickListener != null)
+            {
+                Log.e("Festival Clicked","Festival Clicked")
+                onClickListener!!.onClick(position,currentFestival)
+            }
+        }
     }
 
     override fun getItemCount(): Int {

@@ -1,6 +1,8 @@
-package com.example.final_project
+package com.example.final_project.database
 
 import android.content.Context
+import com.example.final_project.database.DatabaseHandler
+import com.example.final_project.models.Festival
 
 class FestivalRepository(private val context: Context) {
 

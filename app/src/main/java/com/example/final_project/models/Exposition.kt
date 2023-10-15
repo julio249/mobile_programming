@@ -1,9 +1,9 @@
-package com.example.final_project
+package com.example.final_project.models
 
 import java.io.Serializable
 import java.util.Date
 
-data class Festival(
+data class Exposition(
     val id: Int,
     val title: String,
     val location: String,

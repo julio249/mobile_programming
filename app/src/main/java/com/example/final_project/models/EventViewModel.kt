@@ -1,6 +1,7 @@
-package com.example.final_project
+package com.example.final_project.models
 
 import androidx.lifecycle.ViewModel
+import com.example.final_project.database.FestivalRepository
 
 class EventViewModel (private val repository: FestivalRepository): ViewModel() {
 

@@ -1,8 +1,9 @@
-package com.example.final_project
+package com.example.final_project.activities
 
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import com.example.final_project.R
 
 class GalleryActivity: AppCompatActivity() , View.OnClickListener {
 

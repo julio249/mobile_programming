@@ -1,4 +1,4 @@
-package com.example.final_project
+package com.example.final_project.database
 
 import android.content.ContentValues
 import android.content.Context
@@ -6,7 +6,7 @@ import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteException
 import android.database.sqlite.SQLiteOpenHelper
-import com.example.final_project.Festival
+import com.example.final_project.models.Festival
 
 //creating the database logic, extending the SQLiteOpenHelper base class
 class DatabaseHandler(context: Context) :

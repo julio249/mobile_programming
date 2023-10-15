@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:fillViewport="true"
-    tools:context=".FestivalActivity">
+    tools:context=".activities.FestivalActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
