@@ -12,3 +12,12 @@ data class Festival(
 //    val ticketPrice: Double,
 //    val performers: List<String>
 ):Serializable
+
+data class FestivalResponse(
+    val _embedded: Embedded?
+)
+
+data class Embedded(
+    val events: List<Festival>?
+)
+

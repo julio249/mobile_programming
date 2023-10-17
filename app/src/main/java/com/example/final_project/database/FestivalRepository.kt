@@ -20,6 +20,7 @@ class FestivalRepository(private val context: Context) {
             Festival(7, "Glastonbury Festival", "Pilton", "June 21", "June 25")
         )
 
+
     }
 
     fun populateFestivalTable()
