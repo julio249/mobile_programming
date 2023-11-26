@@ -6,7 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- Your main content ScrollView -->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -18,66 +17,32 @@
             android:orientation="vertical"
             android:background="@color/white">
 
+
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="236dp"
+                android:layout_height="214dp"
                 android:background="#f85f6a"
                 android:orientation="vertical">
 
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="top"
-                    android:layout_marginTop="40dp"
-                    android:gravity="center"
-                    android:orientation="horizontal">
-
-                    <Button
-
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:background="@drawable/ic_menu_home"
-                        android:textSize="16sp" />
-
-                    <TextView
-                        android:id="@+id/id_signUp_btn"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="120dp"
-                        android:layout_marginEnd="120dp"
-                        android:gravity="center"
-                        android:text="VistaHub"
-                        android:textColor="@color/white"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
-
-                    <Button
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:background="@drawable/ic_info_home" />
-
-
-                </LinearLayout>
-
-                <LinearLayout
                     android:layout_width="361dp"
-                    android:layout_height="107dp"
+                    android:layout_height="109dp"
                     android:layout_gravity="center"
-                    android:layout_marginTop="30dp"
+                    android:layout_marginTop="80dp"
                     android:background="@drawable/menu_data_location"
-                    android:orientation="horizontal" >
+                    android:orientation="horizontal">
 
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginStart="15dp"
-                        android:background="@drawable/ic_my_location_main"/>
+                        android:background="@drawable/ic_my_location_main" />
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/til_location"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                        android:layout_width="147dp"
+                        android:layout_width="160dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -86,15 +51,14 @@
 
                         <androidx.appcompat.widget.AppCompatEditText
                             android:id="@+id/et_location"
-                            android:layout_width="94dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="20dp"
-                            android:layout_marginEnd="20dp"
-                            android:textSize="12sp"
-                            android:hint="Location"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
                             android:background="@drawable/no_border"
+                            android:focusable="false"
+                            android:focusableInTouchMode="false"
                             android:inputType="textCapWords"
-                            android:textColor="@color/white" />
+                            android:textColor="@color/white"
+                            android:textSize="12sp" />
                     </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -103,7 +67,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginStart="15dp"
-                        android:background="@drawable/ic_my_date_home"/>
+                        android:background="@drawable/ic_my_date_home" />
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/til_date"
@@ -120,14 +84,14 @@
                             android:id="@+id/et_date"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textSize="12sp"
                             android:layout_marginStart="20dp"
                             android:layout_marginEnd="20dp"
-                            android:focusable="false"
                             android:background="@drawable/no_border"
+                            android:focusable="false"
                             android:focusableInTouchMode="false"
                             android:hint="All Dates"
-                            android:inputType="text" />
+                            android:inputType="text"
+                            android:textSize="12sp" />
 
 
                     </com.google.android.material.textfield.TextInputLayout>
@@ -138,36 +102,142 @@
 
             </LinearLayout>
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="22dp"
+                android:textColor="@color/mainColor"
+                android:layout_margin="10dp"
+                android:text="Browse by Category">
+
+            </TextView>
+
+            <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="216dp"
+                android:columnCount="2"
+                android:columnOrderPreserved="false"
+                android:padding="8dp"
+                android:rowCount="2">
+
+                <!-- First ImageView -->
+                <androidx.cardview.widget.CardView
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_rowWeight="1"
+                    android:layout_columnWeight="1"
+                    android:layout_gravity="fill"
+                    android:layout_margin="@dimen/cardview_default_radius"
+                    app:cardCornerRadius="8dp">
+
+                    <ImageButton
+                        android:id="@+id/btn_festival"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/festival">
+
+                    </ImageButton>
+
+                </androidx.cardview.widget.CardView>
+
+                <!-- Second ImageView -->
+                <androidx.cardview.widget.CardView
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_rowWeight="1"
+                    android:layout_columnWeight="1"
+                    android:layout_gravity="fill"
+                    android:layout_margin="@dimen/cardview_default_radius"
+                    app:cardCornerRadius="8dp">
+
+                    <ImageButton
+                        android:id="@+id/btn_gallery"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/gallery">
+
+                    </ImageButton>
+
+
+                </androidx.cardview.widget.CardView>
+
+                <!-- Third ImageView -->
+                <androidx.cardview.widget.CardView
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_rowWeight="1"
+                    android:layout_columnWeight="1"
+                    android:layout_gravity="fill"
+                    android:layout_margin="@dimen/cardview_default_radius"
+                    app:cardCornerRadius="8dp">
+
+                    <ImageButton
+                        android:id="@+id/btn_museum"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/museums">
+
+                    </ImageButton>
+
+
+                </androidx.cardview.widget.CardView>
+
+                <!-- Fourth ImageView -->
+                <androidx.cardview.widget.CardView
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_rowWeight="1"
+                    android:layout_columnWeight="1"
+                    android:layout_gravity="fill"
+                    android:layout_margin="@dimen/cardview_default_radius"
+                    app:cardCornerRadius="8dp">
+
+                    <ImageButton
+                        android:id="@+id/btn_plays"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/plays">
+
+                    </ImageButton>
+
+
+                </androidx.cardview.widget.CardView>
+
+            </GridLayout>
+
+
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
                 android:layout_marginBottom="80dp"
+                android:orientation="vertical"
 
                 >
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="25dp"
+                    android:layout_marginTop="20dp"
                     android:text="Up-Coming Festivals"
                     android:textColor="#f85f6a"
                     android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginStart="25dp"
-                    />
+                    android:textStyle="bold" />
 
                 <androidx.recyclerview.widget.RecyclerView
 
                     android:id="@+id/rv_upcoming_festivals"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:orientation="horizontal"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    app:layout_behavior = "@string/appbar_scrolling_view_behavior"
-                    android:paddingStart="20dp"
                     android:layout_marginTop="10dp"
-                    android:paddingEnd="20dp">
+                    android:gravity="center"
+
+                    android:orientation="horizontal"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="20dp"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
 
                 </androidx.recyclerview.widget.RecyclerView>
@@ -175,75 +245,100 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="25dp"
+                    android:layout_marginTop="20dp"
+                    android:text="Up-Coming Plays"
+                    android:textColor="#f85f6a"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_upcoming_plays"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:paddingStart="20dp"
+
+                    android:paddingEnd="20dp"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+                </androidx.recyclerview.widget.RecyclerView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="25dp"
+                    android:layout_marginTop="20dp"
                     android:text="Up-Coming Art Expositions"
                     android:textColor="#f85f6a"
                     android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginStart="25dp"
-                    />
+                    android:textStyle="bold" />
 
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_upcoming_expositions"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingStart="20dp"
-                    android:paddingEnd="20dp"
                     android:layout_marginTop="10dp"
-
                     android:gravity="center"
                     android:orientation="horizontal"
+
+                    android:paddingStart="20dp"
+                    android:paddingEnd="20dp"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    app:layout_behavior = "@string/appbar_scrolling_view_behavior"
-                    >
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
 
                 </androidx.recyclerview.widget.RecyclerView>
 
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Up-Coming Plays"
-                    android:textColor="#f85f6a"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginStart="25dp"
-                    />
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv_upcoming_plays"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:paddingStart="20dp"
-                    android:paddingEnd="20dp"
-                    android:layout_marginTop="10dp"
-
-                    android:orientation="horizontal"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    app:layout_behavior = "@string/appbar_scrolling_view_behavior"
-                    >
-
-                </androidx.recyclerview.widget.RecyclerView>
 
             </LinearLayout>
 
         </LinearLayout>
 
     </ScrollView>
+    <!-- Your main content ScrollView -->
 
-    <!-- Bottom Navigation View -->
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottom_navigation"
+
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:background="#dee2e6"
-        android:layout_height="40dp"
-        android:layout_alignParentBottom="true"
-        app:menu="@menu/bottom_navigation_menu" />
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay"
+        android:id="@+id/app_bar_layout"
+        android:layout_alignParentTop="true">
 
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar_task_list_activity"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="#f85f6a"
+            app:layout_collapseMode="pin"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
 
+    </com.google.android.material.appbar.AppBarLayout>
 
 </RelativeLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,3 +1,8 @@
 <resources>
-    <string name="app_name">final_project</string>
+    <string name="app_name">DastHub</string>
+    <string name="classification_name">Music</string>
+    <string name="Segment_name">Electronic</string>
+    <string name="ticket_master_api_key">mMIHJTX0pAJxZp6P9P8X7AnrGHWTkreJ</string>
+    <string name="google_place_api_key">AIzaSyCKv0y0Ia7Q9vtYqWKPfXsgkVWH3h69Fgc</string>
+    <string name="icon_generator">https://perchance.org/ai-icon-generator</string>
 </resources>

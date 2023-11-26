@@ -2,77 +2,80 @@ package com.example.final_project.activities
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import android.view.WindowManager
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
 import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.android.volley.toolbox.Volley
 import com.example.final_project.R
-import com.example.final_project.adapters.FestivalAdapter
 import com.example.final_project.adapters.FestivalFeedAdapter
-import com.example.final_project.database.DatabaseHandler
 import com.example.final_project.models.Festival
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import retrofit2.Call
-import retrofit2.Response
-import retrofit2.Callback
-
 
 
 class FestivalActivity : AppCompatActivity(), FestivalFeedAdapter.OnClickListener {
+    //Declares Recycler Views
     private lateinit var festivalFeedRecyclerView: RecyclerView
-    private lateinit var FestivalFeedAdapter: FestivalFeedAdapter
+    //Declares the festival adapter
+    private lateinit var festivalFeedAdapter: FestivalFeedAdapter
     private var toolBarFestivalFeed : Toolbar? = null
-    private lateinit var bottomNavigationView: BottomNavigationView
+    private lateinit var festival_search_view: SearchView
+
+    private var city: String = ""
+    private var latitude: Double = 0.0
+    private var longitude: Double = 0.0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.festival_activity)
+        window.setFlags(
+            WindowManager.LayoutParams.FLAG_FULLSCREEN,
+            WindowManager.LayoutParams.FLAG_FULLSCREEN
+        )
         toolBarFestivalFeed = findViewById(R.id.toolBarFestivalFeed)
         festivalFeedRecyclerView = findViewById(R.id.rv_festival_feed)
-        bottomNavigationView = findViewById(R.id.bottom_navigation)
         setSupportActionBar(toolBarFestivalFeed)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        festival_search_view =findViewById(R.id.festival_search_view)
+
         supportActionBar!!.title = "Event"
         toolBarFestivalFeed!!.setNavigationOnClickListener {
             onBackPressed()
         }
-        getFestivalListFromLocalDB()
-        bottomNavigationView.setOnItemSelectedListener { menuItem ->
-            when (menuItem.itemId) {
-                R.id.home_btn -> {
-                    // Handle item 1 selection
-                    // You can put your code here
-                    val festivalIntent = Intent(this, HomeActivity::class.java)
-                    startActivity(festivalIntent)
-                    true // Return true to indicate that the item click event was handled
 
-                }
-                R.id.festivals_btn -> {
-                    // Handle item 2 selection
-
-//                    val intentEvent = Intent(this,FestivalActivity::class.java)
-                    // You can put your code here
-
-                    val festivalIntent = Intent(this, FestivalActivity::class.java)
-                    startActivity(festivalIntent)
-
-                    true // Return true to indicate that the item click event was handled
-                }
-                R.id.galleries_btn -> {
-                    // Handle item 2 selection
-                    // You can put your code here
-                    val galleryIntent = Intent(this, GalleryActivity::class.java)
-                    startActivity(galleryIntent)
-                    true // Return true to indicate that the item click event was handled
-                }
-                // Add more cases for other items as needed
-                else -> false // Return false if the item click event was not handled
+        festival_search_view.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                Log.e("Query",query!!)
+                return true
             }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                Log.e("Query",newText!!)
+                return true
+            }
+        })
+
+        if (intent.hasExtra(HomeActivity.EXTRA_LATITUDE))
+        {
+            city = intent.getStringExtra(HomeActivity.EXTRA_EVENTS_CITY).toString()
+            latitude = intent.getDoubleExtra(HomeActivity.EXTRA_LATITUDE,0.0)
+            longitude = intent.getDoubleExtra(HomeActivity.EXTRA_LONGITUDE,0.0)
+
+            Log.e("SetLongLAt", this.latitude.toString())
+            Log.e("SetLongLAt", this.longitude.toString())
         }
 
 
+        festivalActivityApiRequest(city,latitude,longitude)
+
+
     }
+
+
 
 
     override fun onClick(position: Int, model: Festival) {
@@ -83,22 +86,39 @@ class FestivalActivity : AppCompatActivity(), FestivalFeedAdapter.OnClickListene
     {
         festivalFeedRecyclerView.layoutManager = LinearLayoutManager(this,
             LinearLayoutManager.VERTICAL,false)
-        FestivalFeedAdapter = FestivalFeedAdapter(this,festivalList)
-        festivalFeedRecyclerView.adapter = FestivalFeedAdapter
+//        FestivalFeedAdapter = FestivalFeedAdapter(this,festivalList)
+        festivalFeedRecyclerView.adapter = festivalFeedAdapter
 
 
     }
 
-    private fun getFestivalListFromLocalDB() {
-        try {
-            val dbHandler = DatabaseHandler(this)
-            val getFestivalList: ArrayList<Festival> = dbHandler.getFestivalsList()
+    private fun festivalActivityApiRequest(location:String,latitude:Double,longitude:Double)
+    {
+        Log.e("FestivalLoc",latitude.toString())
+        val queue = Volley.newRequestQueue(this) // Create a request queue
+        val ticketmasterApiClient = TicketmasterApiClient(resources.getString(R.string.ticket_master_api_key), queue)
 
-            if (getFestivalList.size > 0) {
+        ticketmasterApiClient.searchUpComingMusicEvents(location,latitude,longitude,
+            {
+                Toast.makeText(this,"Connected to TicketMaster successfully" , Toast.LENGTH_SHORT).show()
+                getFestivalList(it)
+
+            },
+            {
+                Toast.makeText(this,"Api Error" , Toast.LENGTH_SHORT).show()
+            })
+    }
+
+    private fun getFestivalList(festivals: List<Festival>) {
+        try {
+//            val dbHandler = DatabaseHandler(this)
+//            val getFestivalList: festivals
+
+            if (festivals.size > 0) {
 //                message("List Seems to be populated")
 //                tv_no_records?.visibility = View.GONE
                 festivalFeedRecyclerView.visibility = View.VISIBLE
-                setupFestivalFeedRecyclerView(getFestivalList)
+                setupFestivalRecyclerView(festivals)
             } else {
 //                message("List Seems to be not populated")
                 festivalFeedRecyclerView?.visibility = View.GONE
@@ -108,6 +128,26 @@ class FestivalActivity : AppCompatActivity(), FestivalFeedAdapter.OnClickListene
             e.printStackTrace()
 //            message("An error occurred: ${e.message}")
         }
+    }
+
+    private fun setupFestivalRecyclerView (festivalList: List<Festival>)
+    {
+        festivalFeedRecyclerView.layoutManager = LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false)
+
+        festivalFeedAdapter = FestivalFeedAdapter(this,festivalList)
+        festivalFeedRecyclerView.adapter = festivalFeedAdapter
+
+        //Shows details of the clicked festival
+
+        festivalFeedAdapter.setOnClickListener(object : FestivalFeedAdapter.OnClickListener {
+            override fun onClick(position: Int, model: Festival)
+            {
+                val intent = Intent(this@FestivalActivity, FestivalPageActivity::class.java)
+                intent.putExtra(HomeActivity.EXTRA_FESTIVAL_DETAILS,model)
+                startActivity(intent)
+
+            }
+        })
     }
 }
 

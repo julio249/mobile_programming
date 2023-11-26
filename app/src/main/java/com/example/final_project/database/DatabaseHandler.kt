@@ -47,90 +47,90 @@ class DatabaseHandler(context: Context) :
     }
 
     //Add tasks to the database
-    fun addFestival(festival: Festival): Long {
-        val db = this.writableDatabase
-
-        val contentValues = ContentValues()
-        contentValues.put(KEY_TITLE, festival.title)
-        contentValues.put(KEY_LOCATION, festival.location)
-        contentValues.put(KEY_START_DATE, festival.startDate)
-        contentValues.put(KEY_END_DATE, festival.endDate)
-//        contentValues.put(KEY_LATITUDE, festival.latitude)
-//        contentValues.put(KEY_LONGITUDE, festival.longitude)
-
-        val result = db.insert(TABLE_FESTIVAL, null, contentValues)
-        db.close() // Closing database connection
-        return result
-    }
+//    fun addFestival(festival: Festival): Long {
+//        val db = this.writableDatabase
+//
+//        val contentValues = ContentValues()
+//        contentValues.put(KEY_TITLE, festival.title)
+//        contentValues.put(KEY_LOCATION, festival.location)
+//        contentValues.put(KEY_START_DATE, festival.startDate)
+//        contentValues.put(KEY_END_DATE, festival.endDate)
+////        contentValues.put(KEY_LATITUDE, festival.latitude)
+////        contentValues.put(KEY_LONGITUDE, festival.longitude)
+//
+//        val result = db.insert(TABLE_FESTIVAL, null, contentValues)
+//        db.close() // Closing database connection
+//        return result
+//    }
 
     //Method that update a task
-    fun updateFestival(festival: Festival): Int {
-        val db = this.writableDatabase
-
-        val contentValues = ContentValues()
-        contentValues.put(KEY_TITLE, festival.title)
-        contentValues.put(KEY_LOCATION, festival.location)
-        contentValues.put(KEY_START_DATE, festival.startDate)
-        contentValues.put(KEY_END_DATE,festival.endDate)
+//    fun updateFestival(festival: Festival): Int {
+//        val db = this.writableDatabase
+//
+//        val contentValues = ContentValues()
+//        contentValues.put(KEY_TITLE, festival.title)
 //        contentValues.put(KEY_LOCATION, festival.location)
-//        contentValues.put(KEY_LATITUDE, task.latitude)
-//        contentValues.put(KEY_LONGITUDE, task.longitude)
-//        contentValues.put(KEY_DONE, if (task.isDone) 1 else 0)
-//        contentValues.put(KEY_RECURRENT, task.isRecurrent)
-
-        val success = db.update(
-            TABLE_FESTIVAL,
-            contentValues,
-            KEY_ID + "="+ festival.id,
-            null)
-
-        db.close() // Closing database connection
-        return success
-    }
+//        contentValues.put(KEY_START_DATE, festival.startDate)
+//        contentValues.put(KEY_END_DATE,festival.endDate)
+////        contentValues.put(KEY_LOCATION, festival.location)
+////        contentValues.put(KEY_LATITUDE, task.latitude)
+////        contentValues.put(KEY_LONGITUDE, task.longitude)
+////        contentValues.put(KEY_DONE, if (task.isDone) 1 else 0)
+////        contentValues.put(KEY_RECURRENT, task.isRecurrent)
+//
+//        val success = db.update(
+//            TABLE_FESTIVAL,
+//            contentValues,
+//            KEY_ID + "="+ festival.id,
+//            null)
+//
+//        db.close() // Closing database connection
+//        return success
+//    }
 
     //Deletes a task
-    fun deleteFestival(task: Festival) : Int {
-        val db = this.writableDatabase
-        val success = db.delete(TABLE_FESTIVAL, KEY_ID +"=" + task.id,null)
-        db.close()
-        return success
-    }
+//    fun deleteFestival(task: Festival) : Int {
+//        val db = this.writableDatabase
+//        val success = db.delete(TABLE_FESTIVAL, KEY_ID +"=" + task.id,null)
+//        db.close()
+//        return success
+//    }
 
     //Gets the list of all tasks in the database
-    fun getFestivalsList(): ArrayList<Festival> {
-        val festivalList: ArrayList<Festival> = ArrayList()
-        val selectQuery = "SELECT  * FROM $TABLE_FESTIVAL"
-        val db = this.readableDatabase
-
-        try {
-            val cursor: Cursor = db.rawQuery(selectQuery, null)
-            if (cursor.moveToFirst()) {
-                do {
-//                    var isDone = cursor.getInt(cursor.getColumnIndexOrThrow(KEY_DONE)) == 1 // Convert integer to boolean
-
-                    val festival = Festival(
-                        cursor.getInt(cursor.getColumnIndexOrThrow(KEY_ID)),
-                        cursor.getString(cursor.getColumnIndexOrThrow(KEY_TITLE)),
-                        cursor.getString(cursor.getColumnIndexOrThrow(KEY_LOCATION)),
-                        cursor.getString(cursor.getColumnIndexOrThrow(KEY_START_DATE)),
-                        cursor.getString(cursor.getColumnIndexOrThrow(KEY_END_DATE)),
+//    fun getFestivalsList(): ArrayList<Festival> {
+//        val festivalList: ArrayList<Festival> = ArrayList()
+//        val selectQuery = "SELECT  * FROM $TABLE_FESTIVAL"
+//        val db = this.readableDatabase
+//
+//        try {
+//            val cursor: Cursor = db.rawQuery(selectQuery, null)
+//            if (cursor.moveToFirst()) {
+//                do {
+////                    var isDone = cursor.getInt(cursor.getColumnIndexOrThrow(KEY_DONE)) == 1 // Convert integer to boolean
+//
+//                    val festival = Festival(
+//                        cursor.getInt(cursor.getColumnIndexOrThrow(KEY_ID)),
+//                        cursor.getString(cursor.getColumnIndexOrThrow(KEY_TITLE)),
 //                        cursor.getString(cursor.getColumnIndexOrThrow(KEY_LOCATION)),
-//                        cursor.getDouble(cursor.getColumnIndexOrThrow(KEY_LATITUDE)),
-//                        cursor.getDouble(cursor.getColumnIndexOrThrow(KEY_LONGITUDE)),
-//                        isDone,cursor.getString(cursor.getColumnIndexOrThrow(KEY_RECURRENT))
-
-                    )
-                    festivalList.add(festival)
-                } while (cursor.moveToNext())
-            }
-            cursor.close()
-        } catch (e: SQLiteException) {
-            db.execSQL(selectQuery)
-            return ArrayList()
-        }
-
-        return festivalList
-    }
+//                        cursor.getString(cursor.getColumnIndexOrThrow(KEY_START_DATE)),
+//                        cursor.getString(cursor.getColumnIndexOrThrow(KEY_END_DATE)),
+////                        cursor.getString(cursor.getColumnIndexOrThrow(KEY_LOCATION)),
+////                        cursor.getDouble(cursor.getColumnIndexOrThrow(KEY_LATITUDE)),
+////                        cursor.getDouble(cursor.getColumnIndexOrThrow(KEY_LONGITUDE)),
+////                        isDone,cursor.getString(cursor.getColumnIndexOrThrow(KEY_RECURRENT))
+//
+//                    )
+//                    festivalList.add(festival)
+//                } while (cursor.moveToNext())
+//            }
+//            cursor.close()
+//        } catch (e: SQLiteException) {
+//            db.execSQL(selectQuery)
+//            return ArrayList()
+//        }
+//
+//        return festivalList
+//    }
 
 
 }

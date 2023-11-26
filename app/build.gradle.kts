@@ -67,7 +67,18 @@ dependencies {
     implementation(platform("com.squareup.okhttp3:okhttp-bom:4.10.0"))
     implementation("com.squareup.okhttp3:okhttp")
     implementation("com.squareup.okhttp3:logging-interceptor")
+    implementation ("com.android.volley:volley:1.2.0")
     implementation ("com.google.code.gson:gson:2.9.0")
+    implementation ("com.squareup.picasso:picasso:2.8")
+    implementation("com.google.android.libraries.places:places:3.2.0")
+
+    implementation ("org.simpleframework:simple-xml:2.7.1")
+    implementation ("com.squareup.retrofit2:converter-simplexml:2.9.0")
+    implementation("de.hdodenhof:circleimageview:3.1.0")
+
+
+
+
 }
 
 

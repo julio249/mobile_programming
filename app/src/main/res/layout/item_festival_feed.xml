@@ -2,12 +2,13 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:layout_gravity="center"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.cardview.widget.CardView
-        android:layout_width="350dp"
-        android:layout_height="200dp"
+        android:layout_width="340dp"
+        android:layout_height="365dp"
         android:background="@drawable/details_festival_feed"
         android:orientation="vertical"
 
@@ -24,96 +25,72 @@
             android:layout_height="match_parent"
             android:background="@drawable/details_festival_feed">
 
-            <LinearLayout
-                android:id="@+id/info_bar"
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_view"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintBottom_toTopOf="@id/content_bar_festival"
+                android:layout_height="250dp"
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                android:layout_gravity="fill"
+                android:layout_margin="@dimen/cardview_default_radius"
+                app:cardCornerRadius="8dp"
+                app:layout_constraintBottom_toTopOf="@id/title_festival"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/ic_festival_date"
-                    android:layout_width="10dp"
-                    android:layout_height="10dp"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="12dp"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/ic_festival_date" />
+                <ImageView
+                    android:id="@+id/iv_festival_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"></ImageView>
 
-                <TextView
-                    android:id="@+id/tv_startDate"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
-                    android:padding="8dp"
-                    android:textColor="#35424a"
-                    android:textSize="8sp"
-                    tools:text="Start Date" />
 
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/add_favorite_festival"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+            </androidx.cardview.widget.CardView>
 
-                    android:layout_gravity="center|end"
-                    android:layout_marginStart="260dp"
-                    android:scaleType="centerCrop"
-
-                    android:src="@drawable/ic_add_favorite_festival" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/content_bar_festival"
+            <TextView
+                android:id="@+id/title_festival"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:orientation="horizontal"
+                android:layout_marginBottom="48dp"
+                android:textSize="20dp"
+                android:text="Title"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.625"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/card_view">
+
+            </TextView>
+
+            <TextView
+                android:id="@+id/date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/detailsColor"
+                android:text="Date"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.625"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/title_festival"
+                app:layout_constraintVertical_bias="0.0">
+
+            </TextView>
+
+            <TextView
+                android:id="@+id/venue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Venue"
+                android:textColor="@color/detailsColor"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/info_bar">
+                app:layout_constraintTop_toBottomOf="@id/date">
 
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/iv_festival_image"
-                    android:layout_width="192dp"
-                    android:layout_height="93dp"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/image_place_holder" />
+            </TextView>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:background="@color/white"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/tv_title"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:textColor="#35424a"
-                        android:textSize="8sp"
-                        tools:text="Title" />
-
-                    <TextView
-                        android:id="@+id/tv_location"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:padding="8dp"
-                        android:textColor="#8b8e90"
-                        android:textSize="6sp"
-                        tools:text="Location" />
-
-
-                </LinearLayout>
-
-            </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -5,12 +5,14 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.final_project.models.Festival
 import com.example.final_project.R
+import com.squareup.picasso.Picasso
 
-class FestivalFeedAdapter (private val context: Context, private val festivalList: ArrayList<Festival>):
+class FestivalFeedAdapter (private val context: Context, private val festivalList: List<Festival>):
     RecyclerView.Adapter<FestivalFeedAdapter.MyViewHolder> () {
 
     private var onClickListener : OnClickListener? = null
@@ -28,10 +30,11 @@ class FestivalFeedAdapter (private val context: Context, private val festivalLis
 
         val currentFestival = festivalList[position]
 
-        holder.title.text = currentFestival.title
-        holder.location.text = currentFestival.location
-        holder.startDate.text = currentFestival.startDate
+        holder.name.text = currentFestival.eventName
+        holder.venue.text = currentFestival.venue
+        holder.date.text = currentFestival.date
 
+        Picasso.get().load(currentFestival.imageUrl).into(holder.image)
 
         holder.itemView.setOnClickListener{
             if (onClickListener != null)
@@ -57,8 +60,10 @@ class FestivalFeedAdapter (private val context: Context, private val festivalLis
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
     {
-        val title: TextView = itemView.findViewById(R.id.tv_title)
-        val location: TextView = itemView.findViewById(R.id.tv_location)
-        val startDate: TextView = itemView.findViewById(R.id.tv_startDate)
+        val name: TextView = itemView.findViewById(R.id.title_festival)
+        val venue: TextView = itemView.findViewById(R.id.venue)
+        val image: ImageView = itemView.findViewById(R.id.iv_festival_image)
+        val date: TextView = itemView.findViewById(R.id.date)
+
     }
 }

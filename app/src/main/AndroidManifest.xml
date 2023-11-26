@@ -1,41 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/dastan_icon2"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/dastan_icon2"
         android:supportsRtl="true"
         android:theme="@style/Theme.Final_project"
         tools:targetApi="31">
         <activity
+            android:name=".activities.LineupActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.PlayActivity"
+            android:exported="true" />
+        <activity
+            android:name=".adapters.PlaceHolderFeedAdapter"
+            android:exported="false" />
+        <activity
             android:name=".activities.HomeActivity"
-            android:exported="true">
+            android:exported="true" /> <!-- Add the FestivalActivity declaration here -->
+        <activity
+            android:name=".activities.FestivalActivity"
+            android:exported="true" />
+        <activity
+            android:name=".activities.SplashActivity"
+            android:exported="true"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <!-- Add the FestivalActivity declaration here -->
-        <activity
-            android:name=".activities.FestivalActivity"
-            android:exported="true">
-        </activity>
-
-        <activity android:name=".activities.FestivalPageActivity">
-
-        </activity>
-
+        <activity android:name=".activities.FestivalPageActivity" />
+        <activity android:name=".activities.PlayPageActivity" />
         <activity
             android:name=".activities.GalleryActivity"
-            android:exported="true">
-        </activity>
+            android:exported="true" />
     </application>
 
 </manifest>

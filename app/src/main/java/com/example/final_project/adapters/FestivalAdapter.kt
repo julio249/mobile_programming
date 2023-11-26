@@ -5,12 +5,14 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.final_project.models.Festival
 import com.example.final_project.R
+import com.squareup.picasso.Picasso
 
-class FestivalAdapter (private val context: Context, private val festivalList: ArrayList<Festival>):
+class FestivalAdapter(private val context: Context, private val festivalList: List<Festival>):
     RecyclerView.Adapter<FestivalAdapter.MyViewHolder> () {
 
     private var onClickListener : OnClickListener? = null
@@ -28,11 +30,11 @@ class FestivalAdapter (private val context: Context, private val festivalList: A
 
         val currentFestival = festivalList[position]
 
-        holder.title.text = currentFestival.title
-        holder.location.text = currentFestival.location
-        holder.startDate.text = currentFestival.startDate
-        holder.endDate.text = currentFestival.endDate
+        holder.eventName.text = currentFestival.eventName
+        holder.venue.text = currentFestival.venue
+        holder.date.text = currentFestival.date
 
+        Picasso.get().load(currentFestival.imageUrl).into(holder.image)
 
         holder.itemView.setOnClickListener{
             if (onClickListener != null)
@@ -58,9 +60,9 @@ class FestivalAdapter (private val context: Context, private val festivalList: A
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
     {
-        val title: TextView = itemView.findViewById(R.id.tv_title)
-        val location: TextView = itemView.findViewById(R.id.tv_location)
-        val startDate: TextView = itemView.findViewById(R.id.tv_startDate)
-        val endDate: TextView = itemView.findViewById(R.id.tv_endDate)
+        val eventName: TextView = itemView.findViewById(R.id.tv_title)
+        val venue: TextView = itemView.findViewById(R.id.tv_location)
+        val date: TextView = itemView.findViewById(R.id.tv_startDate)
+        val image: ImageView = itemView.findViewById(R.id.iv_festival_image)
     }
 }
