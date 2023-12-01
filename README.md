@@ -1,2 +1,1 @@
-# mobile_programming
-mobile programming final project
+# DastaHub - Culture, Music and Art Events
