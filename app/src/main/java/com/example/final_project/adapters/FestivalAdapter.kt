@@ -10,6 +10,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.final_project.models.Festival
 import com.example.final_project.R
+import com.example.final_project.models.Gallery
 import com.squareup.picasso.Picasso
 
 class FestivalAdapter(private val context: Context, private val festivalList: List<Festival>):

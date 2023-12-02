@@ -3,6 +3,18 @@
     <string name="classification_name">Music</string>
     <string name="Segment_name">Electronic</string>
     <string name="ticket_master_api_key">mMIHJTX0pAJxZp6P9P8X7AnrGHWTkreJ</string>
+    <string name="yelp_api_key">ZAJJZ2cshnhFPjG1SrpDAeCl0ERHlfJEKN9hc7KITvUQmD6jBhjEVRf8l0rEz8AJwtnBfrA6i8IFjPSZLG3dX-QAPEsLUiMNSDkYDelRNZI5W1lbSajeCsT6QHNnZXYx
+
+
+</string>
     <string name="google_place_api_key">AIzaSyCKv0y0Ia7Q9vtYqWKPfXsgkVWH3h69Fgc</string>
     <string name="icon_generator">https://perchance.org/ai-icon-generator</string>
+    <string name="please_wait">Please Wait&#8230;</string>
+    <string name="please_click_back_again_to_exit">Please click back again to exit.</string>
+    <string name="pop">Pop</string>
+    <string name="edm">EDM</string>
+    <string name="rock">Rock</string>
+    <string name="latin" >Latin</string>
+
+
 </resources>

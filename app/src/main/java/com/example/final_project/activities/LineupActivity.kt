@@ -16,6 +16,7 @@ class LineupActivity : AppCompatActivity() {
 
     private lateinit var lineupRecyclerView: RecyclerView
     private lateinit var lineupAdapter: LineupAdapter
+
     private var toolbarLineup: Toolbar? =null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

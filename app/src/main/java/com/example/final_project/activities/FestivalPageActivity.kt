@@ -26,6 +26,7 @@ class FestivalPageActivity: AppCompatActivity() {
     private var iv_festival_image: ImageView? =null
     private var btn_url: Button? = null
     private var btn_lineup:Button? = null
+    private var btn_spotify_festival: Button? = null
 
 
 
@@ -40,7 +41,7 @@ class FestivalPageActivity: AppCompatActivity() {
         toolbarFestivalDetail = findViewById(R.id.toolBar)
         iv_festival_image = findViewById(R.id.iv_festival_image)
         btn_lineup = findViewById(R.id.btn_lineup_festival)
-
+//        btn_spotify_festival = findViewById(R.id.btn_spotify_festival)
         btn_url = findViewById(R.id.btn_buy_tickets_festival)
         var festivalDetailModel : Festival? = null
 
@@ -79,6 +80,14 @@ class FestivalPageActivity: AppCompatActivity() {
             lineupIntent.putExtra(LINEUP_INFO,festivalDetailModel)
             startActivity(lineupIntent)
         }
+//        btn_spotify_festival!!.setOnClickListener {
+//
+//            var browserIntent = Intent(Intent.ACTION_VIEW)
+//            browserIntent.setData(Uri.parse(festivalDetailModel!!.lineup[0].spotifyProfile))
+//            startActivity(browserIntent)
+//        }
+
+
 
 
     }

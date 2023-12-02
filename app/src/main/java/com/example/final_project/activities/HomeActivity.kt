@@ -1,12 +1,10 @@
 package com.example.final_project.activities
 
 import android.app.DatePickerDialog
-import android.app.TimePickerDialog
 import android.content.Intent
 import android.content.IntentSender
 import android.content.pm.PackageManager
 import android.location.Geocoder
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Looper
 import android.util.Log
@@ -23,8 +21,10 @@ import com.android.volley.toolbox.Volley
 import com.example.final_project.models.Festival
 import com.example.final_project.R
 import com.example.final_project.adapters.FestivalAdapter
+import com.example.final_project.adapters.GalleryAdapter
 import com.example.final_project.adapters.PlaceholderAdapter
 import com.example.final_project.adapters.PlayAdapter
+import com.example.final_project.models.Gallery
 import com.example.final_project.models.Play
 import com.google.android.gms.common.api.ResolvableApiException
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -37,23 +37,23 @@ import com.google.android.libraries.places.api.Places
 import com.google.android.libraries.places.api.model.Place
 import com.google.android.libraries.places.widget.Autocomplete
 import com.google.android.libraries.places.widget.model.AutocompleteActivityMode
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
 import kotlin.math.log
 
-class HomeActivity : AppCompatActivity(),View.OnClickListener {
+class HomeActivity : BaseActivity(),View.OnClickListener {
 
     //Recycler views
     private lateinit var festivalsRecyclerView: RecyclerView
-    private lateinit var expositionsRecyclerView: RecyclerView
     private lateinit var playsRecyclerView: RecyclerView
+    private lateinit var galleriesRecyclerView:RecyclerView
 
     //Adapters
     private lateinit var myFestivalAdapter: FestivalAdapter
     private lateinit var myPlayAdapter:PlayAdapter
+    private lateinit var mGalleryAdapter: GalleryAdapter
 
     //Location
     private lateinit var mfusedLocationClient: FusedLocationProviderClient
@@ -82,10 +82,7 @@ class HomeActivity : AppCompatActivity(),View.OnClickListener {
         this.latitude = long
         this.longitude = latitude
 
-
     }
-
-
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -95,6 +92,7 @@ class HomeActivity : AppCompatActivity(),View.OnClickListener {
             WindowManager.LayoutParams.FLAG_FULLSCREEN,
             WindowManager.LayoutParams.FLAG_FULLSCREEN
         )
+        showProgressDialog("Loading")
 
         if (!Places.isInitialized())
         {
@@ -113,8 +111,8 @@ class HomeActivity : AppCompatActivity(),View.OnClickListener {
 
         //Recycler views initialization
         festivalsRecyclerView = findViewById(R.id.rv_upcoming_festivals)
-        expositionsRecyclerView = findViewById(R.id.rv_upcoming_expositions)
         playsRecyclerView = findViewById(R.id.rv_upcoming_plays)
+        galleriesRecyclerView = findViewById(R.id.rv_upcoming_galleries)
 
         //Initialization of date
         et_date = findViewById(R.id.et_date)
@@ -127,8 +125,6 @@ class HomeActivity : AppCompatActivity(),View.OnClickListener {
         //Set up location request parameters
         locationRequest = LocationRequest.create().apply {
 
-            interval = 100000
-            fastestInterval = 5000
             priority = LocationRequest.PRIORITY_HIGH_ACCURACY
         }
 
@@ -195,25 +191,26 @@ class HomeActivity : AppCompatActivity(),View.OnClickListener {
 
         btnFestival?.setOnClickListener {
 
-
             val festivalIntent = Intent(this, FestivalActivity::class.java)
             festivalIntent.putExtra(EXTRA_LATITUDE, latitude)
             festivalIntent.putExtra(EXTRA_LONGITUDE, longitude)
-
-
-
-
             startActivity(festivalIntent)
 
         }
 
         btnPlays?.setOnClickListener {
-
             val playsIntent = Intent(this, PlayActivity::class.java)
             playsIntent.putExtra(EXTRA_LATITUDE, latitude)
             playsIntent.putExtra(EXTRA_LONGITUDE, longitude)
-
             startActivity(playsIntent)
+        }
+
+        btnGallery?.setOnClickListener {
+
+            val galleryIntent = Intent(this,GalleryActivity::class.java)
+            galleryIntent.putExtra(EXTRA_LATITUDE,latitude)
+            galleryIntent.putExtra(EXTRA_LONGITUDE,longitude)
+            startActivity(galleryIntent)
         }
 
         et_date?.setOnClickListener {
@@ -338,11 +335,24 @@ class HomeActivity : AppCompatActivity(),View.OnClickListener {
 
         val queue = Volley.newRequestQueue(this) // Create a request queue
         val ticketmasterApiClient = TicketmasterApiClient(resources.getString(R.string.ticket_master_api_key), queue)
+        val yelpApiClient = YelpApiClient(resources.getString(R.string.yelp_api_key),queue)
 
+        yelpApiClient.searchUpComingArtEvents(location,latitude,longitude,
+            {
+                hideProgressDialog()
+                Log.e("YelpBusiness",it.toString())
+
+                getGalleryList(it)
+
+            },
+            {
+                Toast.makeText(this,"Api Error" , Toast.LENGTH_SHORT).show()
+            })
 
         ticketmasterApiClient.searchUpComingMusicEvents(location,latitude,longitude,
             {
-                Toast.makeText(this,"Connected to TicketMaster successfully" , Toast.LENGTH_SHORT).show()
+                hideProgressDialog()
+//                Toast.makeText(this,"Connected to TicketMaster successfully" , Toast.LENGTH_SHORT).show()
                 getFestivalList(it)
 
             },
@@ -352,7 +362,9 @@ class HomeActivity : AppCompatActivity(),View.OnClickListener {
 
         ticketmasterApiClient.searchUpComingArtEvents(location, latitude, longitude,
             {
-                Toast.makeText(this,"Connected to TicketMaster successfully" , Toast.LENGTH_SHORT).show()
+
+                hideProgressDialog()
+//                Toast.makeText(this,"Connected to TicketMaster successfully" , Toast.LENGTH_SHORT).show()
                 getPlayList(it)
 
             },
@@ -374,6 +386,30 @@ class HomeActivity : AppCompatActivity(),View.OnClickListener {
         festivalsRecyclerView.layoutManager = LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false)
         festivalsRecyclerView.adapter = placeHolderAdapter
 
+        galleriesRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,false)
+        galleriesRecyclerView.adapter = placeHolderAdapter
+
+
+
+    }
+
+    private fun setupGalleryRecyclerView(galleryList: List<Gallery>) {
+
+        galleriesRecyclerView.layoutManager = LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false)
+
+        mGalleryAdapter = GalleryAdapter(this,galleryList)
+        galleriesRecyclerView.adapter = mGalleryAdapter
+
+        //Shows details of the clicked festival
+
+        mGalleryAdapter.setOnClickListener(object : GalleryAdapter.OnClickListener {
+            override fun onClick(position: Int, model: Gallery)
+            {
+                val intent = Intent(this@HomeActivity, GalleryPageActivity::class.java)
+                intent.putExtra(EXTRA_GALLERY_DETAILS,model)
+                startActivity(intent)
+            }
+        })
     }
     private fun setupFestivalRecyclerView (festivalList: List<Festival>)
     {
@@ -413,6 +449,23 @@ class HomeActivity : AppCompatActivity(),View.OnClickListener {
             }
         })
     }
+
+    private fun getGalleryList(galleries: List<Gallery>) {
+        runOnUiThread {
+            try {
+                if (galleries.size > 0) {
+                    galleriesRecyclerView.visibility = View.VISIBLE
+                    setupGalleryRecyclerView(galleries)
+                } else {
+                    galleriesRecyclerView.visibility = View.GONE
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+    }
+
+
 
     private fun getFestivalList(festivals: List<Festival>) {
         try {
@@ -457,6 +510,7 @@ class HomeActivity : AppCompatActivity(),View.OnClickListener {
         var EXTRA_EVENTS_CITY = "extra_events_city"
         var EXTRA_FESTIVAL_DETAILS = "extra_place_details"
         var EXTRA_PLAY_DETAILS = "extra_place_details"
+        var EXTRA_GALLERY_DETAILS = "extra_gallery_details"
         var EXTRA_LATITUDE = "extra_latitude"
         var EXTRA_LONGITUDE = "extra_longitude"
 

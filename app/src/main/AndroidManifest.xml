@@ -31,6 +31,8 @@
         <activity
             android:name=".activities.FestivalActivity"
             android:exported="true" />
+        <activity android:name=".activities.GalleryPageActivity"
+            android:exported="true"/>
         <activity
             android:name=".activities.SplashActivity"
             android:exported="true"

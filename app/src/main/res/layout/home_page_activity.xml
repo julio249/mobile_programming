@@ -272,14 +272,14 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="25dp"
                     android:layout_marginTop="20dp"
-                    android:text="Up-Coming Art Expositions"
+                    android:text="Popular Galleries"
                     android:textColor="#f85f6a"
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv_upcoming_expositions"
+                    android:id="@+id/rv_upcoming_galleries"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"

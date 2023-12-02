@@ -11,6 +11,20 @@
 
 
     <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/tv_no_records"
+            android:gravity="center"
+            android:textSize="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="No Events Found">
+
+        </TextView>
+    </LinearLayout>
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -31,10 +45,60 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Festival"
+                android:text="Music Event"
                 android:textColor="@color/mainColor"
                 />
         </androidx.appcompat.widget.Toolbar>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="left"
+            android:layout_margin="10dp"
+            android:background="@color/white">
+
+         <TextView
+             android:id="@+id/btn_pop"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:padding="5dp"
+             android:layout_margin="10dp"
+             android:gravity="center"
+             android:text="@string/pop"
+             android:background="@drawable/btn_format_festival_view"
+
+             ></TextView>
+        <TextView
+            android:id="@+id/btn_edm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:background="@drawable/btn_format_festival_view"
+            android:layout_margin="10dp"
+
+
+            android:text="@string/edm"
+            ></TextView>
+        <TextView
+            android:id="@+id/btn_rock"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:background="@drawable/btn_format_festival_view"
+            android:layout_margin="10dp"
+            android:text="@string/rock"
+            ></TextView>
+        <TextView
+            android:id="@+id/btn_latin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:background="@drawable/btn_format_festival_view"
+            android:layout_margin="10dp"
+            android:text="@string/latin"
+            ></TextView>
+        </LinearLayout>
 
 
         <LinearLayout

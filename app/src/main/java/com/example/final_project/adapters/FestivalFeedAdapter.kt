@@ -12,7 +12,7 @@ import com.example.final_project.models.Festival
 import com.example.final_project.R
 import com.squareup.picasso.Picasso
 
-class FestivalFeedAdapter (private val context: Context, private val festivalList: List<Festival>):
+class FestivalFeedAdapter (private val context: Context, private var festivalList: List<Festival>):
     RecyclerView.Adapter<FestivalFeedAdapter.MyViewHolder> () {
 
     private var onClickListener : OnClickListener? = null
@@ -65,5 +65,10 @@ class FestivalFeedAdapter (private val context: Context, private val festivalLis
         val image: ImageView = itemView.findViewById(R.id.iv_festival_image)
         val date: TextView = itemView.findViewById(R.id.date)
 
+    }
+
+    fun submitList(festivalList: List<Festival>){
+        this.festivalList = festivalList
+        notifyDataSetChanged()
     }
 }
