@@ -148,8 +148,6 @@ class HomeActivity : BaseActivity(),View.OnClickListener {
             Log.e("Long",it.toString())
         }
 
-
-
         task.addOnFailureListener {e->
 
             if (e is ResolvableApiException)
@@ -162,31 +160,27 @@ class HomeActivity : BaseActivity(),View.OnClickListener {
             }
         }
 
-
         et_location = findViewById(R.id.et_location)
-
         et_location?.setOnClickListener(this)
-
-//        homeActivityApiRequest("Dallas")
 
 
         setupDefaultRecyclerViews()
 
         // TODO: Fix UarkNwes api
 
-//        val uark = UarkNewsApiClient(this)
-//
-//        uark.searchNews(
-//            keyWords = "concert",
-//            onSuccess = { response ->
-//                // Handle the successful response
-//                Toast.makeText(this,"Connected to UARK successfully" , Toast.LENGTH_SHORT).show()
-//            },
-//            onError = { errorMessage ->
-//                // Handle the error
-//                Toast.makeText(this,"Error Connecting to uark" , Toast.LENGTH_SHORT).show()
-//            }
-//        )
+        val uark = UarkNewsApiClient(this)
+
+        uark.searchNews(
+            keyWords = "concert",
+            onSuccess = { response ->
+                // Handle the successful response
+                Toast.makeText(this,"Connected to UARK successfully" , Toast.LENGTH_SHORT).show()
+            },
+            onError = { errorMessage ->
+                // Handle the error
+                Toast.makeText(this,"Error Connecting to uark" , Toast.LENGTH_SHORT).show()
+            }
+        )
 
 
         btnFestival?.setOnClickListener {
@@ -264,10 +258,8 @@ class HomeActivity : BaseActivity(),View.OnClickListener {
                     et_location.setText(city)
                     setLongLat(latitude,longitude)
                     homeActivityApiRequest(city,latitude,longitude)
-
                 }
             }
-
         }
     }
 

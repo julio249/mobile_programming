@@ -11,13 +11,13 @@
 
 
     <LinearLayout
-        android:id="@+id/ll_no_lineup_"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
         android:orientation="horizontal">
 
         <TextView
+            android:id="@+id/tv_no_lineup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"

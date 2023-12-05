@@ -4,12 +4,14 @@ import android.os.Parcel
 import android.os.Parcelable
 
 data class Festival(
+
     val eventName: String?,
     val date: String?,
     val venue: String?,
     val imageUrl: String?,
     val ticketUrl: String?,
     val lineup: MutableList<Artist>
+
 ):Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString(),

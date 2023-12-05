@@ -38,6 +38,7 @@ class YelpApiClient(private val apiKey: String, private val queue: RequestQueue)
                     val responseBody = response.body!!.string()
                     if (response.isSuccessful && !responseBody.isNullOrBlank())
                     {
+                        Log.e("YelpResponse", responseBody)
                         val nameAndTypeList = extractGalleryFromJSON(responseBody)
                         onSuccess(nameAndTypeList)
                     }

@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
+import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -16,6 +17,7 @@ class LineupActivity : AppCompatActivity() {
 
     private lateinit var lineupRecyclerView: RecyclerView
     private lateinit var lineupAdapter: LineupAdapter
+    private var tv_no_records: TextView? = null
 
     private var toolbarLineup: Toolbar? =null
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,6 +31,7 @@ class LineupActivity : AppCompatActivity() {
 
         lineupRecyclerView = findViewById(R.id.rv_lineup)
         toolbarLineup = findViewById(R.id.toolBar_lineup)
+        tv_no_records = findViewById(R.id.tv_no_lineup)
 
         setSupportActionBar(toolbarLineup)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
@@ -58,9 +61,12 @@ class LineupActivity : AppCompatActivity() {
             if (artists.size > 0) {
 
                 lineupRecyclerView.visibility = View.VISIBLE
+                tv_no_records!!.visibility = View.GONE
                 setupLineupRecyclerView(artists)
             } else {
                 lineupRecyclerView?.visibility = View.GONE
+                tv_no_records!!.visibility = View.VISIBLE
+
             }
         } catch (e: Exception) {
             e.printStackTrace()
