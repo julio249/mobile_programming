@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "114321444091",
+    "project_id": "dasthub-8c57a",
+    "storage_bucket": "dasthub-8c57a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:114321444091:android:b54f5c763de08edef6b45e",
+        "android_client_info": {
+          "package_name": "com.example.final_project"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCuMl75PzURKWc9amJDwwg5J1U7qvTGiSo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

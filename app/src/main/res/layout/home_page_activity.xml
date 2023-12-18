@@ -15,7 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:orientation="vertical"
-            android:background="@color/white">
+            android:background="#ffffff">
 
 
             <LinearLayout
@@ -57,7 +57,7 @@
                             android:focusable="false"
                             android:focusableInTouchMode="false"
                             android:inputType="textCapWords"
-                            android:textColor="@color/white"
+                            android:textColor="@color/white_background"
                             android:textSize="12sp" />
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -311,7 +311,7 @@
         android:layout_alignParentTop="true">
 
         <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar_task_list_activity"
+            android:id="@+id/toolbar_activity"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="#f85f6a"

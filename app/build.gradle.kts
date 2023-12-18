@@ -1,6 +1,7 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -71,10 +72,20 @@ dependencies {
     implementation ("com.google.code.gson:gson:2.9.0")
     implementation ("com.squareup.picasso:picasso:2.8")
     implementation("com.google.android.libraries.places:places:3.2.0")
-
     implementation ("org.simpleframework:simple-xml:2.7.1")
     implementation ("com.squareup.retrofit2:converter-simplexml:2.9.0")
     implementation("de.hdodenhof:circleimageview:3.1.0")
+
+    implementation("com.google.firebase:firebase-firestore:24.9.1")
+
+    implementation("de.hdodenhof:circleimageview:3.0.1")
+    //FireBase Essential
+    implementation ("com.google.firebase:firebase-auth:22.2.0")
+
+    //FireBase Essential
+    implementation("com.google.firebase:firebase-storage:20.3.0")
+
+    implementation("com.google.firebase:firebase-messaging:23.3.1")
 
 
 

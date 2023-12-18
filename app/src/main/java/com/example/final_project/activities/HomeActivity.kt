@@ -8,6 +8,7 @@ import android.location.Geocoder
 import android.os.Bundle
 import android.os.Looper
 import android.util.Log
+import android.view.MenuItem
 import android.view.View
 import android.view.WindowManager
 import android.widget.ImageButton
@@ -15,6 +16,8 @@ import android.widget.Toast
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.appcompat.widget.Toolbar
 import androidx.core.app.ActivityCompat
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.android.volley.toolbox.Volley
@@ -41,9 +44,12 @@ import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
+import com.google.android.material.navigation.NavigationView
+import com.google.firebase.auth.FirebaseAuth
+
 import kotlin.math.log
 
-class HomeActivity : BaseActivity(),View.OnClickListener {
+class HomeActivity : BaseActivity(),View.OnClickListener,NavigationView.OnNavigationItemSelectedListener {
 
     //Recycler views
     private lateinit var festivalsRecyclerView: RecyclerView
@@ -73,9 +79,13 @@ class HomeActivity : BaseActivity(),View.OnClickListener {
     private var btnPlays: ImageButton? = null
 
     //Tool bars
-    private lateinit var toolbarTaskListActivity: Toolbar
+    private lateinit var toolbar_activity: Toolbar
     private var longitude: Double = 0.0
     private var latitude: Double = 0.0
+
+
+    private var drawer_layout: DrawerLayout? =null
+
 
     private fun setLongLat (long: Double, latitude: Double)
     {
@@ -87,7 +97,7 @@ class HomeActivity : BaseActivity(),View.OnClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.home_page_activity)
+        setContentView(R.layout.activity_main)
         window.setFlags(
             WindowManager.LayoutParams.FLAG_FULLSCREEN,
             WindowManager.LayoutParams.FLAG_FULLSCREEN
@@ -116,6 +126,9 @@ class HomeActivity : BaseActivity(),View.OnClickListener {
 
         //Initialization of date
         et_date = findViewById(R.id.et_date)
+
+        drawer_layout = findViewById(R.id.drawer_layout)
+
 
 
         //Initialization of location service provider
@@ -220,11 +233,66 @@ class HomeActivity : BaseActivity(),View.OnClickListener {
 
 
     }
+
+    private fun toggleDrawer()
+    {
+        if (drawer_layout!!.isDrawerOpen(GravityCompat.START))
+        {
+            drawer_layout!!.closeDrawer(GravityCompat.START)
+        }
+        else
+        {
+            drawer_layout!!.openDrawer(GravityCompat.START)
+        }
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        if (drawer_layout!!.isDrawerOpen(GravityCompat.START))
+        {
+            drawer_layout!!.closeDrawer(GravityCompat.START)
+        }
+        else{
+            doubleBackToExit()
+        }
+    }
     private fun updateDateInView() {
         val dateFormat = "dd/MM/YYYY"
         val sdf = SimpleDateFormat(dateFormat, Locale.getDefault())
         et_date?.setText(sdf.format(calender.time))
     }
+
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+
+        when (item.itemId){
+
+            R.id.nav_my_profile ->{
+
+//                startActivityForResult(Intent(this,MyProfileActivity::class.java),
+//                    MY_PROFILE_REQUEST_CODE)
+
+//                Toast.makeText(this@MainActivity,"My Profile", Toast.LENGTH_SHORT).show()
+            }
+
+            R.id.nav_sing_out ->{
+
+//                mSharePreferences.edit().clear().apply()
+//
+//                FirebaseAuth.getInstance().signOut()
+//                Toast.makeText(this@MainActivity,"SignOut", Toast.LENGTH_SHORT).show()
+//                val intent = Intent(this,IntroActivity::class.java)
+//                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP)
+//                startActivity(intent)
+//                finish()
+            }
+
+        }
+
+        drawer_layout?.closeDrawer(GravityCompat.START)
+        return true
+
+    }
+
     private fun requestLocationUpdates()
     {
         //Check for location permission
@@ -306,8 +374,8 @@ class HomeActivity : BaseActivity(),View.OnClickListener {
     }
 
     private fun setUpActionBar() {
-        toolbarTaskListActivity = findViewById(R.id.toolbar_task_list_activity)
-        setSupportActionBar(toolbarTaskListActivity)
+        toolbar_activity = findViewById(R.id.toolbar_activity)
+        setSupportActionBar(toolbar_activity)
 
         val actionBar = supportActionBar
 
@@ -317,6 +385,10 @@ class HomeActivity : BaseActivity(),View.OnClickListener {
             actionBar.title = "DastHub"
         }
 
+
+        toolbar_activity.setNavigationOnClickListener {
+            toggleDrawer()
+        }
 
     }
 
@@ -505,8 +577,6 @@ class HomeActivity : BaseActivity(),View.OnClickListener {
         var EXTRA_GALLERY_DETAILS = "extra_gallery_details"
         var EXTRA_LATITUDE = "extra_latitude"
         var EXTRA_LONGITUDE = "extra_longitude"
-
-
         const val PERMISSION_REQUEST_CODE = 1
         const val REQUEST_IMAGE_CAPTURE = 2
         const val PLACE_AUTOCOMPLETE_REQUEST_CODE = 3

@@ -27,12 +27,36 @@
             android:exported="false" />
         <activity
             android:name=".activities.HomeActivity"
+
             android:exported="true" /> <!-- Add the FestivalActivity declaration here -->
+
+        <activity android:name=".activities.SignInActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:exported="false">
+        </activity>
+
+        <activity android:name=".activities.SignUpActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait"
+            android:exported="false">
+
+        </activity>
         <activity
             android:name=".activities.FestivalActivity"
             android:exported="true" />
         <activity android:name=".activities.GalleryPageActivity"
             android:exported="true"/>
+        <activity android:name=".activities.IntroActivity"
+            android:screenOrientation="portrait"
+            android:exported="true"
+            android:theme="@style/AppTheme.NoActionBar">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
         <activity
             android:name=".activities.SplashActivity"
             android:exported="true"
