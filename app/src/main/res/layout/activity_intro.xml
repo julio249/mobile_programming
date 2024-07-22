@@ -33,6 +33,7 @@
         android:textColor="@color/primary_text_color"
         android:textSize="@dimen/lets_get_started_text_size" />
 
+    <!--TODO (Step 8: Button background files are added in the drawable folder.)-->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -45,7 +46,6 @@
         android:textColor="@color/secondary_text_color"
         android:textSize="@dimen/intro_text_size" />
 
-    <!--TODO (Step 8: Button background files are added in the drawable folder.)-->
     <Button
         android:id="@+id/btn_sign_in_intro"
         android:layout_width="match_parent"
